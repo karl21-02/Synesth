@@ -1,244 +1,257 @@
-# Synesth
+<div align="center">
 
-> AI-powered webpage mood detection with YouTube music streaming
+# 🎧 Synesth
 
-![Version](https://img.shields.io/badge/version-2.1.0-blue)
-![Platform](https://img.shields.io/badge/platform-Chrome%20Extension-green)
-![Manifest](https://img.shields.io/badge/manifest-v3-orange)
+### Every page has a soundtrack. Let AI find it for you.
 
-Synesth는 웹페이지의 분위기를 AI로 분석하여 어울리는 음악을 자동으로 추천하고 재생하는 Chrome 확장 프로그램입니다.
+[![Version](https://img.shields.io/badge/version-2.1.0-667eea?style=for-the-badge)](https://github.com/yourusername/Synesth/releases)
+[![Chrome](https://img.shields.io/badge/Chrome-Extension-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://chrome.google.com)
+[![Manifest](https://img.shields.io/badge/Manifest-V3-FF6B6B?style=for-the-badge)](https://developer.chrome.com/docs/extensions/mv3/)
+[![OpenAI](https://img.shields.io/badge/Powered%20by-GPT--4o-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com)
 
----
+<br />
 
-## Features
+**Synesth** analyzes the mood of any webpage using AI and automatically plays the perfect matching music from YouTube.
 
-- **AI 분위기 분석** - GPT-4o-mini가 웹페이지 콘텐츠를 분석하여 분위기 판단
-- **YouTube 스트리밍** - 분위기에 맞는 음악을 YouTube에서 자동 검색 및 재생
-- **다양한 분위기** - "Cyberpunk Tension", "Cozy Autumn Evening" 등 창의적인 분위기 감지
-- **상태 유지** - 페이지 이동, 탭 전환 시에도 음악 재생 유지
-- **드래그 가능 위젯** - 원하는 위치로 이동 가능, 위치 자동 저장
-- **탭 관리** - 탭 전환 시 자동 일시정지/재개 (동시 재생 방지)
+[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Architecture](#-architecture) • [Contributing](#-contributing)
 
----
+<br />
 
-## Screenshots
-
-```
-┌─────────────────────────────┐
-│ ⋮⋮ 🎵 Synesth         − ×  │
-├─────────────────────────────┤
-│ 🌧️ Melancholic Rain         │
-│    Radiohead - Creep        │
-├─────────────────────────────┤
-│ [⏸] [⏭] 🔊 ━━━━━━━━ 80     │
-│ ┌─────────────────────────┐ │
-│ │                         │ │
-│ │    YouTube Player       │ │
-│ │                         │ │
-│ └─────────────────────────┘ │
-└─────────────────────────────┘
-```
+</div>
 
 ---
 
-## Installation
+## ✨ Features
 
-### 개발자 모드 (로컬 설치)
+<table>
+<tr>
+<td width="50%">
 
-1. 이 저장소를 클론합니다:
-   ```bash
-   git clone https://github.com/yourusername/Synesth.git
-   ```
+### 🧠 AI Mood Detection
+GPT-4o-mini analyzes webpage content and detects nuanced moods like *"Cyberpunk Tension"*, *"Cozy Autumn Evening"*, or *"Melancholic Rain"*
 
-2. Chrome에서 `chrome://extensions` 접속
+</td>
+<td width="50%">
 
-3. 우측 상단 **개발자 모드** 활성화
+### 🎵 Smart Music Matching
+Automatically searches YouTube for the perfect soundtrack based on detected mood — from indie to classical, jazz to electronic
 
-4. **압축 해제된 확장 프로그램 로드** 클릭
+</td>
+</tr>
+<tr>
+<td width="50%">
 
-5. `Synesth` 폴더 선택
+### 🔄 Seamless Persistence
+Music keeps playing across page navigation and tab switches. Your listening session never stops.
 
-### Chrome Web Store (예정)
+</td>
+<td width="50%">
 
-> 추후 Chrome Web Store에 등록 예정
+### 🎛️ Floating Widget
+Draggable player widget with full controls — play, pause, skip, volume. Position saved automatically.
 
----
-
-## Usage
-
-1. **확장 프로그램 설치** 후 아무 웹페이지 방문
-
-2. 우측 하단에 **Synesth 위젯** 자동 표시
-
-3. **✨ Analyze Page** 버튼 클릭
-
-4. AI가 페이지 분위기 분석 후 음악 자동 재생
-
-### 위젯 컨트롤
-
-| 버튼 | 기능 |
-|------|------|
-| ⏸ / ▶ | 재생 / 일시정지 |
-| ⏭ | 다음 곡 (같은 분위기) |
-| 🔊 | 볼륨 조절 |
-| ▼ / ▲ | 비디오 표시 / 숨김 |
-| − | 위젯 최소화 |
-| × | 위젯 닫기 (음악 정지) |
-
-### 수동 분위기 선택
-
-1. 확장 프로그램 아이콘 클릭 (팝업 열기)
-2. 원하는 분위기 직접 입력 또는 프리셋 선택
-3. **Play** 버튼 클릭
+</td>
+</tr>
+</table>
 
 ---
 
-## Architecture
+## 📦 Installation
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     Chrome Extension                         │
-│  ┌───────────┐  ┌───────────┐  ┌─────────────────────────┐  │
-│  │ popup.html│  │ popup.js  │  │      content.js         │  │
-│  └─────┬─────┘  └─────┬─────┘  └───────────┬─────────────┘  │
-│        └──────────────┼────────────────────┘                 │
-│                       ▼                                      │
-│              ┌─────────────────┐                             │
-│              │  background.js  │                             │
-│              │ (Service Worker)│                             │
-│              └────────┬────────┘                             │
-└───────────────────────┼─────────────────────────────────────┘
-                        │
-                        ▼
-              ┌─────────────────────┐
-              │  Cloudflare Worker  │ ← API Keys (Secrets)
-              └──────────┬──────────┘
-                         │
-           ┌─────────────┼─────────────┐
-           ▼                           ▼
-   ┌───────────────┐         ┌─────────────────┐
-   │  OpenAI API   │         │  YouTube API    │
-   │ (GPT-4o-mini) │         │  (Data API v3)  │
-   └───────────────┘         └─────────────────┘
+### Option 1: Developer Mode (Recommended)
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/yourusername/Synesth.git
+
+# 2. Open Chrome and navigate to
+chrome://extensions
+
+# 3. Enable "Developer mode" (top right)
+
+# 4. Click "Load unpacked" and select the Synesth folder
 ```
 
----
+### Option 2: Chrome Web Store
 
-## Tech Stack
-
-| Category | Technology |
-|----------|------------|
-| Extension | Chrome Manifest V3 |
-| Frontend | Vanilla JavaScript, CSS3 |
-| Backend | Cloudflare Workers |
-| AI | OpenAI GPT-4o-mini |
-| Media | YouTube IFrame API |
-| Storage | chrome.storage API |
+> 🚧 Coming Soon
 
 ---
 
-## File Structure
+## 🚀 Usage
+
+<table>
+<tr>
+<td width="60%">
+
+### Quick Start
+
+1. Visit any webpage
+2. Click **✨ Analyze Page** on the widget
+3. AI detects the mood and music starts playing
+4. Enjoy the perfect soundtrack!
+
+### Manual Mood Selection
+
+Click the extension icon → Enter any mood → Click **Play**
+
+</td>
+<td width="40%">
+
+### Widget Controls
+
+| Button | Action |
+|:------:|--------|
+| ⏸ / ▶ | Play / Pause |
+| ⏭ | Next track |
+| 🔊 | Volume slider |
+| ▼ / ▲ | Show / Hide video |
+| − | Minimize |
+| × | Close & stop |
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🏗️ Architecture
+
+```
+                              ┌─────────────────────────────────────┐
+                              │         Chrome Extension            │
+                              │                                     │
+   ┌────────────┐             │  ┌─────────┐      ┌─────────────┐  │
+   │  Webpage   │ ◄───────────┼──│ content │      │   popup     │  │
+   │            │             │  │   .js   │      │  .html/.js  │  │
+   └────────────┘             │  └────┬────┘      └──────┬──────┘  │
+                              │       │                  │         │
+                              │       └────────┬─────────┘         │
+                              │                ▼                   │
+                              │       ┌─────────────────┐          │
+                              │       │  background.js  │          │
+                              │       │ (Service Worker)│          │
+                              │       └────────┬────────┘          │
+                              └────────────────┼───────────────────┘
+                                               │
+                                               ▼
+                              ┌─────────────────────────────────────┐
+                              │        Cloudflare Worker            │
+                              │     (API Proxy + Key Storage)       │
+                              └────────────────┬────────────────────┘
+                                               │
+                         ┌─────────────────────┼─────────────────────┐
+                         ▼                                           ▼
+              ┌─────────────────────┐                 ┌─────────────────────┐
+              │    OpenAI API       │                 │   YouTube API       │
+              │   (GPT-4o-mini)     │                 │   (Data API v3)     │
+              └─────────────────────┘                 └─────────────────────┘
+```
+
+---
+
+## 🛠️ Tech Stack
+
+<div align="center">
+
+| Layer | Technology |
+|:-----:|:-----------|
+| 🧩 **Extension** | Chrome Manifest V3 |
+| 🎨 **Frontend** | Vanilla JS, CSS3, CSS Variables |
+| ☁️ **Backend** | Cloudflare Workers (Edge) |
+| 🤖 **AI** | OpenAI GPT-4o-mini |
+| 🎬 **Media** | YouTube IFrame API |
+| 💾 **Storage** | chrome.storage (local + sync) |
+
+</div>
+
+---
+
+## 📁 Project Structure
 
 ```
 Synesth/
-├── manifest.json      # Extension configuration
-├── background.js      # Service Worker (API calls)
-├── content.js         # Widget & Player logic
-├── popup.html         # Popup UI
-├── popup.js           # Popup logic
-├── styles.css         # Widget styles
-├── icons/
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
-└── README.md
+├── 📄 manifest.json       # Extension configuration
+├── 🔧 background.js       # Service worker — API calls, state management
+├── 🎨 content.js          # Widget UI, YouTube player, text extraction
+├── 🖼️ popup.html          # Extension popup UI
+├── ⚡ popup.js            # Popup interactions
+├── 🎭 styles.css          # Widget & toast styles
+└── 📂 icons/
+    ├── icon16.png
+    ├── icon48.png
+    └── icon128.png
 ```
 
 ---
 
-## Configuration
+## ⚙️ Configuration
 
-### Cloudflare Worker 설정
+### Cloudflare Worker Setup
 
-1. [Cloudflare Workers](https://workers.cloudflare.com/) 계정 생성
+1. Create account at [Cloudflare Workers](https://workers.cloudflare.com/)
 
-2. 새 Worker 생성 후 아래 환경변수 설정:
-   ```
+2. Create new Worker and add secrets:
+   ```env
    OPENAI_API_KEY=sk-...
    YOUTUBE_API_KEY=AIza...
    ```
 
-3. `background.js`의 `WORKER_URL` 수정:
+3. Update `background.js`:
    ```javascript
    const WORKER_URL = 'https://your-worker.workers.dev';
    ```
 
 ---
 
-## Permissions
+## 🔐 Permissions
 
-| Permission | Purpose |
-|------------|---------|
-| `activeTab` | Access current tab content |
-| `tabs` | Listen for tab events |
-| `scripting` | Inject scripts dynamically |
-| `storage` | Save player state & settings |
-| `<all_urls>` | Run on all webpages |
+| Permission | Why it's needed |
+|------------|-----------------|
+| `activeTab` | Read current page content for analysis |
+| `tabs` | Detect page navigation & tab switches |
+| `scripting` | Inject widget into webpages |
+| `storage` | Save player state, settings, widget position |
+| `<all_urls>` | Work on any website |
 
 ---
 
-## Development
+## 🤝 Contributing
 
-### 로컬 개발
-
-```bash
-# 저장소 클론
-git clone https://github.com/yourusername/Synesth.git
-cd Synesth
-
-# Chrome에서 로드 후 수정사항 반영
-# chrome://extensions > 새로고침 버튼 클릭
-```
-
-### 빌드 (배포용)
+Contributions are welcome! Here's how:
 
 ```bash
-# ZIP 파일 생성
-zip -r synesth.zip manifest.json background.js content.js \
-  popup.html popup.js styles.css icons/
+# Fork & clone
+git clone https://github.com/YOUR_USERNAME/Synesth.git
+
+# Create feature branch
+git checkout -b feature/awesome-feature
+
+# Make changes & commit
+git commit -m "Add awesome feature"
+
+# Push & create PR
+git push origin feature/awesome-feature
 ```
 
 ---
 
-## Known Issues
+## 📝 License
 
-- 일부 웹사이트에서 CSP(Content Security Policy)로 인해 위젯이 표시되지 않을 수 있음
-- YouTube 임베드가 차단된 영상은 재생 불가
-
----
-
-## Contributing
-
-1. Fork this repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
 
 ---
 
-## License
+<div align="center">
 
-MIT License - see [LICENSE](LICENSE) for details
+### 🙏 Acknowledgments
 
----
+Built with [OpenAI](https://openai.com) • [YouTube API](https://developers.google.com/youtube) • [Cloudflare Workers](https://workers.cloudflare.com)
 
-## Acknowledgments
-
-- [OpenAI](https://openai.com/) - GPT-4o-mini API
-- [YouTube Data API](https://developers.google.com/youtube/v3)
-- [Cloudflare Workers](https://workers.cloudflare.com/)
+<br />
 
 ---
 
-Made with ♥ by Synesth Team
+<sub>Made with ♥ by the Synesth Team</sub>
+
+</div>
