@@ -1,0 +1,348 @@
+/* Synesth - Widget, Player, and Toast Styles */
+
+/* ===== MAIN WIDGET ===== */
+.synesth-widget {
+  --mood-primary: #e94560;
+  --mood-dark: #0f3460;
+  --mood-glow: rgba(233, 69, 96, 0.4);
+
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid var(--mood-primary);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px var(--mood-glow);
+  z-index: 2147483647;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.synesth-widget.minimized {
+  width: auto;
+}
+
+.synesth-widget.minimized .synesth-widget-body,
+.synesth-widget.minimized .synesth-widget-player {
+  display: none !important;
+}
+
+/* Widget Header */
+.synesth-widget-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, var(--mood-dark) 0%, var(--mood-primary) 150%);
+  cursor: grab;
+  user-select: none;
+}
+
+.synesth-widget-header:active {
+  cursor: grabbing;
+}
+
+.synesth-widget-drag {
+  opacity: 0.5;
+  font-size: 14px;
+  letter-spacing: -2px;
+}
+
+.synesth-widget-logo {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.synesth-widget-minimize {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.synesth-widget-minimize:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.synesth-widget-close {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.synesth-widget-close:hover {
+  background: #e94560;
+}
+
+/* Widget Body */
+.synesth-widget-body {
+  padding: 14px;
+}
+
+/* Status Area */
+.synesth-widget-status {
+  margin-bottom: 12px;
+}
+
+.synesth-status-idle,
+.synesth-status-analyzing,
+.synesth-status-playing {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.synesth-status-icon {
+  font-size: 20px;
+}
+
+.synesth-status-idle span:last-child,
+.synesth-status-analyzing span:last-child {
+  color: #888;
+  font-size: 13px;
+}
+
+.synesth-status-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--mood-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.synesth-status-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.synesth-status-mood {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--mood-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.synesth-status-song {
+  font-size: 11px;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+/* Analyze Button */
+.synesth-analyze-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, var(--mood-primary) 0%, var(--mood-dark) 100%);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.synesth-analyze-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--mood-glow);
+}
+
+.synesth-analyze-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.synesth-analyze-icon {
+  font-size: 16px;
+}
+
+.synesth-analyze-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ===== PLAYER SECTION ===== */
+.synesth-widget-player {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.synesth-player-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.synesth-ctrl-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.synesth-ctrl-btn:hover {
+  background: var(--mood-primary);
+  transform: scale(1.05);
+}
+
+.synesth-ctrl-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.synesth-volume-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  margin-left: 4px;
+  font-size: 12px;
+  color: #888;
+}
+
+.synesth-volume {
+  flex: 1;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.synesth-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--mood-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.synesth-volume::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--mood-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.synesth-vol-val {
+  min-width: 22px;
+  text-align: right;
+  font-size: 11px;
+}
+
+/* iframe Container */
+.synesth-iframe-wrap {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.synesth-iframe-wrap.collapsed {
+  padding-bottom: 0;
+  height: 0;
+}
+
+.synesth-iframe-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ===== TOAST NOTIFICATION ===== */
+.synesth-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #fff;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  z-index: 2147483646;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+.synesth-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.synesth-toast-mood {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.synesth-toast-song {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes mood-glow-pulse {
+  0%, 100% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px var(--mood-glow); }
+  50% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 35px var(--mood-glow); }
+}
+
+.synesth-widget:hover {
+  animation: mood-glow-pulse 2s ease-in-out infinite;
+}
